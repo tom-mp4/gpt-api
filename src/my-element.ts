@@ -25,7 +25,25 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
-      <div>
+
+      <main class="main">
+        <img src="/dog.png" class="header-image" />
+        <h3>Name my pet</h3>
+        <form @click=${this._onClick}>
+          <input
+              type="text"
+              name="animal"
+              placeholder="Enter an animal"
+              value={animalInput}
+              <!--onChange={(e) => setAnimalInput(e.target.value)}-->
+          />
+          <input type="submit" value="Generate names" />
+        </form>
+        <div class="respond">{result}</div>
+      </main>
+      </div>
+      
+      <!--<div>
         <a href="https://vitejs.dev" target="_blank">
           <img src=${viteLogo} class="logo" alt="Vite logo" />
         </a>
@@ -39,7 +57,7 @@ export class MyElement extends LitElement {
           count is ${this.count}
         </button>
       </div>
-      <p class="read-the-docs">${this.docsHint}</p>
+      <p class="read-the-docs">${this.docsHint}</p>-->
     `
   }
 
@@ -48,74 +66,72 @@ export class MyElement extends LitElement {
   }
 
   static styles = css`
-    :host {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem;
+    @font-face {
+      font-family: "ColfaxAI";
+      src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
+      url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "ColfaxAI";
+      src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+      url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+      font-weight: bold;
+      font-style: normal;
+    }
+    .main,
+    .main input {
+      font-size: 16px;
+      line-height: 24px;
+      color: #353740;
+      font-family: "ColfaxAI", Helvetica, sans-serif;
+    }
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 60px;
+    }
+    .main .icon {
+      width: 34px;
+    }
+    .main h3 {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: bold;
+      color: #202123;
+      margin: 16px 0 40px;
+    }
+    .main form {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+    }
+    .main input[type="text"] {
+      padding: 12px 16px;
+      border: 1px solid #10a37f;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      outline-color: #10a37f;
+    }
+    .main ::placeholder {
+      color: #8e8ea0;
+      opacity: 1;
+    }
+    .main input[type="submit"] {
+      padding: 12px 0;
+      color: #fff;
+      background-color: #10a37f;
+      border: none;
+      border-radius: 4px;
       text-align: center;
-    }
-
-    .logo {
-      height: 6em;
-      padding: 1.5em;
-      will-change: filter;
-      transition: filter 300ms;
-    }
-    .logo:hover {
-      filter: drop-shadow(0 0 2em #646cffaa);
-    }
-    .logo.lit:hover {
-      filter: drop-shadow(0 0 2em #325cffaa);
-    }
-
-    .card {
-      padding: 2em;
-    }
-
-    .read-the-docs {
-      color: #888;
-    }
-
-    ::slotted(h1) {
-      font-size: 3.2em;
-      line-height: 1.1;
-    }
-
-    a {
-      font-weight: 500;
-      color: #646cff;
-      text-decoration: inherit;
-    }
-    a:hover {
-      color: #535bf2;
-    }
-
-    button {
-      border-radius: 8px;
-      border: 1px solid transparent;
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      font-weight: 500;
-      font-family: inherit;
-      background-color: #1a1a1a;
       cursor: pointer;
-      transition: border-color 0.25s;
     }
-    button:hover {
-      border-color: #646cff;
-    }
-    button:focus,
-    button:focus-visible {
-      outline: 4px auto -webkit-focus-ring-color;
-    }
-
-    @media (prefers-color-scheme: light) {
-      a:hover {
-        color: #747bff;
-      }
-      button {
-        background-color: #f9f9f9;
-      }
+    .main .result {
+      font-weight: bold;
+      margin-top: 40px;
     }
   `
 }
